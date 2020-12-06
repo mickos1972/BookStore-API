@@ -74,7 +74,6 @@ namespace BookStore_API
             });
 
             app.UseHttpsRedirection();
-            //app.UseStaticFiles();
 
             app.UseRouting();
 
