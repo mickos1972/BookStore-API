@@ -50,7 +50,7 @@ namespace BookStore_API.Controllers
             catch (Exception ex)
             {
                 return InternalError($"{ex.Message} - {ex.InnerException}");
-            }            
+            }
         }
 
         /// <summary>
@@ -72,11 +72,11 @@ namespace BookStore_API.Controllers
                 {
                     return NotFound();
                 }
-          
+
                 var response = _mapper.Map<AuthorDTO>(author);
 
                 return Ok(author);
-               
+
             }
             catch (Exception ex)
             {
@@ -87,13 +87,13 @@ namespace BookStore_API.Controllers
         /// <summary>
         /// Create a new author
         /// </summary>
-        /// <param name="authorDTO"></param>
+        /// <param name="author"></param>
         /// <returns>201 created</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Create([FromBody]AuthorCreateDTO authorDTO)
+        public async Task<IActionResult> Create([FromBody] AuthorCreateDTO authorDTO)
         {
             try
             {
@@ -106,7 +106,7 @@ namespace BookStore_API.Controllers
                 //Do an insert
                 var isSuccess = await _authRepo.Create(author);
 
-                if(!isSuccess)
+                if (!isSuccess)
                 {
                     return InternalError($"Author creation failed");
                 }
@@ -117,6 +117,81 @@ namespace BookStore_API.Controllers
             catch (Exception ex)
             {
                 return InternalError($"{ex.Message} - {ex.InnerException}");
+            }
+        }
+
+        /// <summary>
+        /// Update existing author
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="author"></param>
+        /// <returns>200 Updated</returns>
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Update(int id, [FromBody] AuthorUpdateDTO authorDTO)
+        {
+            try
+            {
+                if (id < 1 || authorDTO == null || !ModelState.IsValid || id != authorDTO.Id)
+                    return BadRequest(ModelState);
+               
+                if (!await _authRepo.IsExists(id))
+                    return NotFound();
+
+                //Map from the dto to the entity
+                var author = _mapper.Map<Author>(authorDTO);
+
+                //Do an insert
+                var isSuccess = await _authRepo.Update(author);
+
+                if (!isSuccess)
+                {
+                    return InternalError($"Author update failed");
+                }
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return InternalError($"Update Failed: {ex.Message} - {ex.InnerException}");
+            }
+        }
+
+        /// <summary>
+        /// Delete author
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>200 Deleted</returns>
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                if (id < 1)
+                    return BadRequest(ModelState);
+
+                var author = await _authRepo.FindById(id);
+
+                if (author == null)
+                    return NotFound();
+
+                var isSuccess = await _authRepo.Delete(author);
+
+                if (!isSuccess)
+                {
+                    return InternalError($"Author update failed");
+                }
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return InternalError($"Update Failed: {ex.Message} - {ex.InnerException}");
             }
         }
 

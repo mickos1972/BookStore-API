@@ -11,6 +11,7 @@ namespace BookStore_API.Interfaces
         Task<bool> Create(T entity);
         Task<bool> Update(T entity);
         Task<bool> Delete(T entity);
+        Task<bool> IsExists(int id);
         Task<bool> Save();
     }
 }
