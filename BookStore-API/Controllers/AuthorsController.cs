@@ -195,8 +195,6 @@ namespace BookStore_API.Controllers
             }
         }
 
-
-
         private ObjectResult InternalError(string message)
         {
             _logger.LogError(message);
