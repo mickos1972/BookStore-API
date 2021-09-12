@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.808.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore-API", "BookStore-API\BookStore-API.csproj", "{F0F6E8A2-094F-4A79-85D2-B80A85206AD0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore-UI", "BookStore-UI\BookStore-UI.csproj", "{FDC75B25-7CB7-488A-B87E-46566FC66AE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,11 +17,20 @@ Global
 		{F0F6E8A2-094F-4A79-85D2-B80A85206AD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0F6E8A2-094F-4A79-85D2-B80A85206AD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0F6E8A2-094F-4A79-85D2-B80A85206AD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDC75B25-7CB7-488A-B87E-46566FC66AE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDC75B25-7CB7-488A-B87E-46566FC66AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDC75B25-7CB7-488A-B87E-46566FC66AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDC75B25-7CB7-488A-B87E-46566FC66AE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A3E6D3D3-D554-49E6-B3A3-AEEF1656B20B}
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = PrefixedHierarchical
 	EndGlobalSection
 EndGlobal
